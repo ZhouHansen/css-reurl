@@ -1,5 +1,4 @@
 const {propertyMatcher, urlMatcher} = require('./lib/urlMatcher')
-const fs = require('fs')
 var defaults = require('./lib/excludeProperties')
 
 var reurl = module.exports = function (css, excludeProperties, rewriterFn, done){
@@ -29,11 +28,22 @@ var reurl = module.exports = function (css, excludeProperties, rewriterFn, done)
   }
 
   var urls = urlMatcher.exec(property)
+
+  if (urls === null){
+    done(css)
+    return
+  }
+
   var urlFunc = urls[0]
   var justUrl = urls[1]
 
   rewriterFn(justUrl, url=>{
-    var result = css.replace(new RegExp(justUrl, 'g'), url)
+    var result = css.replace(new RegExp(quote(justUrl), 'g'), url)
     done(result)
   })
+}
+
+// https://stackoverflow.com/questions/16168484/javascript-syntax-error-invalid-regular-expression
+function quote(str){
+  return str.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1")
 }
