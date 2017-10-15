@@ -27,23 +27,31 @@ var reurl = module.exports = function (css, excludeProperties, rewriterFn, done)
     return property
   }
 
-  var urls = urlMatcher.exec(property)
+  var urls = []
 
-  if (urls === null){
+  do {
+    m = urlMatcher.exec(property)
+
+    if (m !== null) {
+      urls.push(m[1])
+    }
+  } while (m)
+
+  if (urls.length === 0){
     done(css)
     return
   }
 
-  var urlFunc = urls[0]
-  var justUrl = urls[1]
-
-  rewriterFn(justUrl, url=>{
-    var result = css.replace(new RegExp(quote(justUrl), 'g'), url)
-    done(result)
-  })
+  Promise.all(urls.map(rewriterFn))
+         .then(res => {
+           res.map(({oldUrl, newUrl}) => {
+             css = css.replace(new RegExp(quote(oldUrl), 'g'), newUrl)
+           })
+           done(css)
+         })
 }
 
 // https://stackoverflow.com/questions/16168484/javascript-syntax-error-invalid-regular-expression
-function quote(str){
+function quote (str){
   return str.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1")
 }

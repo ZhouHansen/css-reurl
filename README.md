@@ -10,12 +10,20 @@ const cssReurl = require('css-reurl')
 
 // read test.css
 fs.readFile('test.css', (err, oldcss) => {
-    cssReurl(oldcss, (oldurl, done)=>{
-      // convert img url to image-base64
-      base64Img.base64(oldurl, (err, newurl)=>{
-        // call done(newurl) to generate newcss
-        done(newurl)
-      })
+    cssReurl(css, url=>{
+      return new Promise((resolve, reject) => {
+
+        base64Img.base64(url, (err, data) => {
+          var oldUrl = url
+          var newUrl = data
+
+          if (data === void 0){
+            newUrl = url
+          }
+
+          resolve({oldUrl, newUrl})
+        })
+      })      
     }, newcss => {
       // after newcss replace oldcss, this callback trigger
       console.log(newcss)
@@ -31,11 +39,14 @@ fs.readFile('test.css', (err, oldcss) => {
 
 `excludeProperties` put properties that contain url but you don't want to convert to a array. `cssReurl(someCSS, ['background'], rewriter, done)`  will rewrite all urls except url in background property.
 
-`rewriter(oldurl, done)` oldurl is the url has been found in your oldcss, then rewrite it to newurl, then call `done(newurl)` to generate newcss, for example:
+`rewriter(url)` return {oldUrl, newUrl} for example:
+
 ```javascript
-cssReurl(someCSS, (oldurl, done) => {
-  var newurl = oldurl + "abc"
-  done(newurl)
+cssReurl(someCSS, url => {
+  var oldUrl = url
+  var newUrl = url + "abc"
+
+  return {oldUrl, newUrl}
 }, done)
 ```
 
