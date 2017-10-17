@@ -1,5 +1,6 @@
 # css-reurl [![stability][0]][1]
  [![npm version][2]][3] [![downloads][4]][5]
+ ![travis build][6]
 
 Rewrite all `url(...)` except `data:` URIs of CSS asynchronously
 
@@ -76,3 +77,4 @@ cssReurl(someCSS, url => {
 [3]: https://npmjs.org/package/css-reurl
 [4]: http://img.shields.io/npm/dm/css-reurl.svg?style=flat-square
 [5]: https://npmjs.org/package/css-reurl
+[6]: https://travis-ci.org/ZhouHansen/css-reurl.svg?branch=master
