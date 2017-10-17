@@ -4,11 +4,11 @@
 
 Rewrite all `url(...)` except `data:` URIs of CSS asynchronously
 
-## install
+## Install
 
 `npm install css-reurl`
 
-## test
+## Test
 
 `npm run test`
 
