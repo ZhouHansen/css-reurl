@@ -1,10 +1,16 @@
 {
   "name": "css-reurl",
-  "version": "1.0.6",
+  "version": "1.0.7",
+  "scripts":{
+    "test": "tape test.js"
+  },
   "description": "rewrite css url asynchronous",
   "main": "index.js",
   "repository": "https://github.com/ZhouHansen/css-reurl",
   "author": "zhouhancheng",
   "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {},
+  "dependencies": {
+    "tape": "^4.8.0"
+  }
 }
