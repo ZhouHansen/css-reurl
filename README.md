@@ -65,7 +65,9 @@ cssReurl(src, url => {
 }, done)
 ```
 
-`done(newcss)` after rewrote, trigger this callback.
+### `done(newcss)` 
+
+after rewrote, trigger this callback.
 
 ## License
 [MIT](https://tldrlegal.com/license/mit-license)
