@@ -1,7 +1,7 @@
 {
   "name": "css-reurl",
-  "version": "1.0.8",
-  "scripts":{
+  "version": "2.0.0",
+  "scripts": {
     "test": "tape test.js"
   },
   "description": "rewrite css url asynchronous",
@@ -11,6 +11,8 @@
   "license": "MIT",
   "devDependencies": {},
   "dependencies": {
+    "css-tree": "^1.0.0-alpha.26",
+    "safe-eval": "^0.3.0",
     "tape": "^4.8.0"
   }
 }

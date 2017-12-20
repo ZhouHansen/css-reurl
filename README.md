@@ -2,15 +2,19 @@
  [![npm version][2]][3] [![downloads][4]][5]
  ![travis build][6]
 
-Rewrite all `url(...)` except `data:` URIs of CSS asynchronously
+Rewrite all Url within a css file asynchronously.
 
 ## Install
 
-`npm install css-reurl`
+```
+  npm install css-reurl
+```
 
 ## Test
 
-`npm run test`
+```
+  npm run test
+```
 
 ## Usage
 ```javascript
@@ -18,20 +22,17 @@ const fs = require('fs')
 const base64Img = require('base64-img')
 const cssReurl = require('css-reurl')
 
-// read test.css
 fs.readFile('test.css', (err, input_css) => {
-    cssReurl(input_css, url=>{
+    cssReurl(input_css, url => {
       return new Promise((resolve, reject) => {
         base64Img.base64(url, (err, newurl) => {
           if (data === void 0){
             resolve(url)
           }
-
           resolve(newurl)
         })
       })      
     }, output_css => {
-      // after newcss replace oldcss, trigger this callback
       console.log(output_css)
     })
 })
@@ -39,16 +40,14 @@ fs.readFile('test.css', (err, input_css) => {
 
 ## API
 
-### `cssReurl(someCSS, excludeProperties, rewriter, done)`
+### `cssReurl(src, fn, done)`
 
-`someCSS` could be either a buffer or a string.
+`src` could be either a buffer or a string.
 
-`excludeProperties` put properties which not to rewrite in it. `cssReurl(someCSS, ['background'], rewriter, done)`  will rewrite all urls except url in background property.
-
-`rewriter(url)` just return the newurl, or a promise resolve the newurl
+`fn(url)` return the newurl, or a promise resolves the newurl
 
 ```javascript
-cssReurl(someCSS, url => {
+cssReurl(src, url => {
   return url + "abc"
 }, done)
 ```
@@ -56,9 +55,9 @@ cssReurl(someCSS, url => {
 or
 
 ```javascript
-cssReurl(someCSS, url => {
+// asynchronously
+cssReurl(src, url => {
   return new Promise((resolve, reject) => {
-    // asynchronously
     setTimeout(() => {
       resolve(url + "abc")
     }, 1000)
@@ -66,7 +65,7 @@ cssReurl(someCSS, url => {
 }, done)
 ```
 
-`done(newcss)` after newcss replace oldcss, trigger this callback.
+`done(newcss)` after rewrote, trigger this callback.
 
 ## License
 [MIT](https://tldrlegal.com/license/mit-license)
