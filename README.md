@@ -2,21 +2,10 @@
  [![npm version][2]][3] [![downloads][4]][5]
  ![travis build][6]
 
-Rewrite all Url within a css file asynchronously.
+Rewrite all css url property asynchronously.
 
-## Install
+## usage
 
-```
-  npm install css-reurl
-```
-
-## Test
-
-```
-  npm run test
-```
-
-## Usage
 ```javascript
 const fs = require('fs')
 const base64Img = require('base64-img')
@@ -38,21 +27,21 @@ fs.readFile('test.css', (err, input_css) => {
 })
 ```
 
-## API
+## api
 
 ### `cssReurl(src, fn, done)`
 
-`src` could be either a buffer or a string.
+* `src<string|buffer>` css source
 
-`fn(url)` return the newurl, or a promise resolves the newurl
+* `fn(url)<function>` return the newurl, or a promise resolves the newurl
+
+* `done(newcss)<function>` rewrote callback with the new source
 
 ```javascript
 cssReurl(src, url => {
   return url + "abc"
 }, done)
 ```
-
-or
 
 ```javascript
 // asynchronously
@@ -65,12 +54,10 @@ cssReurl(src, url => {
 }, done)
 ```
 
-`done(newcss)` after rewrote, trigger this callback.
-
-## License
+## license
 [MIT](https://tldrlegal.com/license/mit-license)
 
-[0]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
+[0]: https://img.shields.io/badge/stability-stable-green.svg
 [1]: https://nodejs.org/api/documentation.html#documentation_stability_index
 [2]: https://img.shields.io/npm/v/css-reurl.svg?style=flat-square
 [3]: https://npmjs.org/package/css-reurl
