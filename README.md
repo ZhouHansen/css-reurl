@@ -54,7 +54,15 @@ cssReurl(src, url => {
 }, done)
 ```
 
+<<<<<<< HEAD
 ## license
+=======
+### `done(newcss)` 
+
+after rewrote, trigger this callback.
+
+## License
+>>>>>>> origin/master
 [MIT](https://tldrlegal.com/license/mit-license)
 
 [0]: https://img.shields.io/badge/stability-stable-green.svg
