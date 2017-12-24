@@ -4,6 +4,8 @@
 
 Rewrite all css url property asynchronously.
 
+works with async functions (node 7.6+)
+
 ## usage
 
 ```javascript
