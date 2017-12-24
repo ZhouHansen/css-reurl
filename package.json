@@ -1,6 +1,6 @@
 {
   "name": "css-reurl",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "scripts": {
     "test": "tape test.js"
   },
