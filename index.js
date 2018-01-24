@@ -35,5 +35,5 @@ async function reurl (src, fn, done) {
     }
   })
 
-  done(csstree.translate(ast))
+  done(csstree.generate(ast))
 }
